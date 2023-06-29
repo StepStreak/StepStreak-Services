@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 	"time"
 
 	"example.com/main/messages"
@@ -12,7 +13,9 @@ import (
 
 type CreateActivityInput struct {
 	Date  time.Time `json:"date" binding:"required"`
-	Steps int16     `json:"steps" binding:"required"`
+	Type  string    `json:"type" binding:"required"`
+	Unit  string    `json:"unit" binding:"required"`
+	Value string    `json:"value" binding:"required"`
 }
 
 func CreateActivity(c *gin.Context) {
@@ -22,7 +25,9 @@ func CreateActivity(c *gin.Context) {
 		return
 	}
 
-	activity := models.Activity{Date: input.Date, Steps: input.Steps}
+	value, _ := strconv.ParseInt(input.Value, 10, 16)
+
+	activity := models.Activity{Date: input.Date, Type: input.Type, Unit: input.Unit, Value: int16(value)}
 	models.DB.Create(&activity)
 
 	messages.Produce(activity.ID)
