@@ -33,7 +33,7 @@ func Produce(id uint) {
 	defer ch.Close()
 
 	q, err := ch.QueueDeclare(
-		"activities",
+		"messages",
 		false,
 		false,
 		false,
