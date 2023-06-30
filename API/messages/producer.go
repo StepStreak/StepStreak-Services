@@ -13,7 +13,7 @@ import (
 type Activity struct {
 	Type  string    `json:"type"`
 	Unit  string    `json:"unit"`
-	Value int16     `json:"value"`
+	Value int32     `json:"value"`
 	Date  time.Time `json:"date"`
 }
 
