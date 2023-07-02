@@ -8,7 +8,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	dsn := "host=localhost port=5432 dbname=StepStreak_development sslmode=disable"
+	dsn := "host=localhost port=5432 dbname=StepStreak_raw sslmode=disable"
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
